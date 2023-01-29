@@ -46,6 +46,11 @@ class MvpView(ft.View):
     def render(self, model: DataclassProtocol):
         model_map = asdict(model)
         for variable_name, ref in self.ref_map.items():
-            if model_map[variable_name] == ref.current.value:
+            control_attribute_name = "value"
+            if not hasattr(ref.current, control_attribute_name):
+                control_attribute_name = "text"
+            control_attribute_value = getattr(ref.current, control_attribute_name)
+
+            if model_map[variable_name] == control_attribute_value:
                 continue
-            ref.current.value = model_map[variable_name]
+            setattr(ref.current, control_attribute_name, model_map[variable_name])
