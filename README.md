@@ -10,7 +10,8 @@ it can be used to ease working with any model-based architecture pattern though.
 
 ## Assumptions/usage
 
-Your model is a dataclass (ideally an immutable/frozen one).
+Your model inherits from MvpModel,
+which is an immutable pydantic BaseModel.
 Some kind of broker is subscribed to be notified of
 any change of the current model of e.g. the data source that holds
 and modifies it/creates updated models.
