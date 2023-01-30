@@ -3,6 +3,8 @@ from typing import List, Optional
 import flet as ft
 from pydantic import BaseModel
 
+from flet_mvp_utils.error import ErrorMessage
+
 
 class MvpView(ft.View):
     def __init__(
@@ -45,6 +47,9 @@ class MvpView(ft.View):
             control_attribute_name = "value"
             if not hasattr(ref.current, control_attribute_name):
                 control_attribute_name = "text"
+            if isinstance(model_map[variable_name], ErrorMessage):
+                control_attribute_name = "error_text"
+
             control_attribute_value = getattr(ref.current, control_attribute_name)
 
             if model_map[variable_name] == control_attribute_value:
