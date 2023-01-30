@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from typing import List, Optional
 
 import flet as ft
@@ -41,7 +40,7 @@ class MvpView(ft.View):
         self.ref_map = ref_map
 
     def render(self, model: BaseModel) -> None:
-        model_map = asdict(model)
+        model_map = model.dict()
         for variable_name, ref in self.ref_map.items():
             control_attribute_name = "value"
             if not hasattr(ref.current, control_attribute_name):
