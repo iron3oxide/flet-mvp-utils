@@ -9,9 +9,8 @@ packages = [{ include = "flet_mvp_utils" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-flet = "^0.3.2"
+flet = { version = "^0.3.2", allow-prereleases = true }
 pydantic = "^1.10.4"
-
 
 [build-system]
 requires = ["poetry-core"]
