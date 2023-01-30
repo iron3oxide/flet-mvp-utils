@@ -1,11 +1,8 @@
 from dataclasses import asdict
-from typing import List, Optional, Protocol
+from typing import List, Optional
 
 import flet as ft
-
-
-class DataclassProtocol(Protocol):
-    __dataclass_fields__: dict
+from pydantic import BaseModel
 
 
 class MvpView(ft.View):
@@ -43,7 +40,7 @@ class MvpView(ft.View):
 
         self.ref_map = ref_map
 
-    def render(self, model: DataclassProtocol):
+    def render(self, model: BaseModel) -> None:
         model_map = asdict(model)
         for variable_name, ref in self.ref_map.items():
             control_attribute_name = "value"
