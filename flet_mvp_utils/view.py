@@ -44,6 +44,7 @@ class MvpView(ft.View):
     def render(self, model: BaseModel) -> None:
         model_map = model.dict()
         for variable_name, ref in self.ref_map.items():
+
             control_attribute_name = "value"
             if not hasattr(ref.current, control_attribute_name):
                 control_attribute_name = "text"
@@ -55,3 +56,6 @@ class MvpView(ft.View):
             if model_map[variable_name] == control_attribute_value:
                 continue
             setattr(ref.current, control_attribute_name, model_map[variable_name])
+
+            if ref.current.page:
+                ref.current.update()
