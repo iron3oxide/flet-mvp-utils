@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Any, Type
 
 from pydantic import BaseModel, ValidationError
 
@@ -10,7 +10,7 @@ class MvpDataSource(Observable):
     def __init__(self, model_class: Type[BaseModel]) -> None:
         super().__init__()
         self.model_class = model_class
-        self.current_model = model_class()
+        self.current_model: Any = model_class()
 
     def update_model_partial(self, changes: dict) -> bool:
         model_map = self.current_model.dict()
