@@ -184,6 +184,8 @@ e.g. because a user put "old" into the age TextField instead of a number,
 our DataSource will now catch this error,
 wrap its message in an `ErrorMessage` object
 and assign it to the age field.
+Multiple errors at once are no problem at all,
+each ErrorMessage will be assigned to the field that caused it.
 
 Since we probably don't want to make any calls to a database, API etc. in that case,
 the update_model methods will return a bool
