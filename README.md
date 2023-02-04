@@ -132,6 +132,12 @@ it is typed as `Any` to avoid typechecking troubles.
 
 ### Model
 
+The model is supposed to act as the state of your view.
+It should contain everything the view needs to know
+in order to render/update itself.
+This can be data from a database, an API,
+a config file or even just another component.
+
 Your model inherits from `MvpModel`,
 which is an immutable pydantic BaseModel.
 This means you can write custom validators for each attribute
