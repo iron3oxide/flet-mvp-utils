@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flet-mvp-utils"
-version = "0.3.2"
+version = "0.3.3"
 description = "Tools to build flet apps with the MVP architecture pattern"
 authors = ["iron3oxide <jason.hottelet@tuta.io>"]
 license = "Apache-2.0"
@@ -9,8 +9,8 @@ packages = [{ include = "flet_mvp_utils" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-flet = { version = "^0.3.2", allow-prereleases = true }
 pydantic = "^1.10.4"
+flet = "^0.4.0"
 
 [build-system]
 requires = ["poetry-core"]

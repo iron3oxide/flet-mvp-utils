@@ -35,26 +35,26 @@ files = [
 
 [[package]]
 name = "flet"
-version = "0.4.0.dev1139"
+version = "0.4.0"
 description = "Flet for Python - easily build interactive multi-platform apps in Python"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "flet-0.4.0.dev1139-py3-none-any.whl", hash = "sha256:dab570122424f2129f7d13a42a9b9fedb294f93721760981ccb8a25d3fc96351"},
-    {file = "flet-0.4.0.dev1139-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:8b828ac6bab13510a3bcef8d9668968467ef6f51eb9b2cbb0f8726adf0f75f43"},
-    {file = "flet-0.4.0.dev1139-py3-none-macosx_12_0_arm64.whl", hash = "sha256:bda569b0c40a15e19490010d5e35a3e91ee3b0685aa5fa71097adedb99749b5c"},
-    {file = "flet-0.4.0.dev1139-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b4f303540cd10ecaf3c53403b1f2cee86ba85120649fef50df823a627857d879"},
-    {file = "flet-0.4.0.dev1139-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:971320d002cf99e44925ae39d03f1d0a0ce962c1a878bf8a0d2c2f00c99130ee"},
-    {file = "flet-0.4.0.dev1139-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5941c5aa9e9fe70dfd67ec663ce6ff3bd3f3ed56aa5c4404679f6a2ee06a4548"},
-    {file = "flet-0.4.0.dev1139-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:a706184d7d5aa44080d1292a78f9795e5844319f2358f7ca0d4c2f8921bf20bf"},
-    {file = "flet-0.4.0.dev1139-py3-none-win32.whl", hash = "sha256:c0b9d8fa37007fd85225daf6c57db189fb96f487fdcd006e477c7cf6e6413bcb"},
-    {file = "flet-0.4.0.dev1139-py3-none-win_amd64.whl", hash = "sha256:db49b379666a1f6fd4729fe53121482d359ee99da9c9b8bdcdd167e0c2f8defb"},
-    {file = "flet-0.4.0.dev1139.tar.gz", hash = "sha256:4014751613c1805f1e565f156848e3ba85e3b9a65063401fab3a551cf44afe16"},
+    {file = "flet-0.4.0-py3-none-any.whl", hash = "sha256:af6c45dcdf5a1fb3a8dd6a1cb22eefbd2ef64af47bfeb079c0dbfae7a5964cb6"},
+    {file = "flet-0.4.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:70df7b847dbdfcb348c9d226932d5562a5e4f0cb46689ab9b0eb0aa4d6c66e79"},
+    {file = "flet-0.4.0-py3-none-macosx_12_0_arm64.whl", hash = "sha256:dff01cef6535b9a39f0ea97c87e4af0790e4ef777ed90c0f8eae1dc5b71190f2"},
+    {file = "flet-0.4.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:04cb6d1335b0750b2e7956c5a64d5187c4aaa9072d87d103f65a9eaba62c20a4"},
+    {file = "flet-0.4.0-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:8f92e0476795017a24f455b91b61057cdbbfa4455612862f58423bb2af3e67e6"},
+    {file = "flet-0.4.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9a3d9d70c8f4e1d16cdc34e5889c78117ebb0052ac2e15dffa04d56008ffb07d"},
+    {file = "flet-0.4.0-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:1afd266b2247a9a957f1a9b678847844ac732c6feed4d73dbf3b06739e794775"},
+    {file = "flet-0.4.0-py3-none-win32.whl", hash = "sha256:e8c907fedf4d47cdfef8333ba62826dcbc583550f407b5a1d3e5702dd6a6ccb5"},
+    {file = "flet-0.4.0-py3-none-win_amd64.whl", hash = "sha256:7c95b59812f229ae8dc69cc69b5871b3f24a9eaafb13e62d05e6ebdb972849c1"},
+    {file = "flet-0.4.0.tar.gz", hash = "sha256:5d65e47ab26c32ec35ea06cbab93a6db5441d8c098a870277788a7e1e261b737"},
 ]
 
 [package.dependencies]
-flet-core = "0.4.0.dev1139"
+flet-core = "0.4.0"
 httpx = ">=0.23.3,<0.24.0"
 oauthlib = ">=3.2.2,<4.0.0"
 packaging = ">=23.0,<24.0"
@@ -64,14 +64,14 @@ websockets = ">=10.4,<11.0"
 
 [[package]]
 name = "flet-core"
-version = "0.4.0.dev1139"
+version = "0.4.0"
 description = "Flet core library"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "flet_core-0.4.0.dev1139-py3-none-any.whl", hash = "sha256:e4f6d01e15321854d984ca8f8210efb06b6072c2a0fa43ddad2ec92fc71bce93"},
-    {file = "flet_core-0.4.0.dev1139.tar.gz", hash = "sha256:2ba59f0181dd7d5c60b7bc48f48ec8f26cb87b53da4e4bcc41d87702500b1caa"},
+    {file = "flet_core-0.4.0-py3-none-any.whl", hash = "sha256:b5b4006451d88a6e600da735d3541b9118dc8accdfea67573cad7f0279e1b0d5"},
+    {file = "flet_core-0.4.0.tar.gz", hash = "sha256:6efe24f8d6e47b686997688646979c8a8cced81bae963155d35907d0a96443c6"},
 ]
 
 [package.dependencies]
@@ -341,14 +341,14 @@ watchmedo = ["PyYAML (>=3.10)"]
 
 [[package]]
 name = "websocket-client"
-version = "1.5.0"
+version = "1.5.1"
 description = "WebSocket client for Python with low level API options"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "websocket-client-1.5.0.tar.gz", hash = "sha256:561ca949e5bbb5d33409a37235db55c279235c78ee407802f1d2314fff8a8536"},
-    {file = "websocket_client-1.5.0-py3-none-any.whl", hash = "sha256:fb5d81b95d350f3a54838ebcb4c68a5353bbd1412ae8f068b1e5280faeb13074"},
+    {file = "websocket-client-1.5.1.tar.gz", hash = "sha256:3f09e6d8230892547132177f575a4e3e73cfdf06526e20cc02aa1c3b47184d40"},
+    {file = "websocket_client-1.5.1-py3-none-any.whl", hash = "sha256:cdf5877568b7e83aa7cf2244ab56a3213de587bbe0ce9d8b9600fc77b455d89e"},
 ]
 
 [package.extras]
@@ -438,4 +438,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "c4f103a34f1cba702ca1e54245f7e9cda8eee04cd21ab45d68a683bbea9afff1"
+content-hash = "000754aafff244e3e6df1574a8e458c36e0d12c973b1f6c4eb59ef459c0648bc"
