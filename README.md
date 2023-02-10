@@ -55,9 +55,9 @@ from flet_mvp_utils import MvpView
 class FormView(MvpView):
     def __init__(self, route: str)
         self.ref_map = {
-            "last_name": ft.Ref[ft.TextField]()
-            "first_name": ft.Ref[ft.TextField]()
-            "age": ft.Ref[ft.TextField]()
+            "last_name": ft.Ref[ft.TextField](),
+            "first_name": ft.Ref[ft.TextField](),
+            "age": ft.Ref[ft.TextField](),
         }
         super().__init__(
             ref_map=self.ref_map,
