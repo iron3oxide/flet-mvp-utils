@@ -189,7 +189,9 @@ If the creation of a new model fails,
 e.g. because a user put "old" into the age TextField instead of a number,
 our DataSource will now catch this error,
 wrap its message in an `ErrorMessage` object
-and assign it to the age field.
+and assign it to the age field
+of a new model that contains all changes,
+both the valid inputs and the error mesages.
 Multiple errors at once are no problem at all,
 each ErrorMessage will be assigned to the field that caused it.
 
