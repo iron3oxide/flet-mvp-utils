@@ -1,15 +1,17 @@
 from typing import List, Optional
 
 import flet as ft
+from abstractcp import Abstract, abstract_class_property
 from pydantic import BaseModel
 
 from flet_mvp_utils.error import ErrorMessage
 
 
-class MvpView(ft.View):
+class MvpView(Abstract, ft.View):
+    ref_map = abstract_class_property(dict[str, ft.Ref])
+
     def __init__(
         self,
-        ref_map: dict[str, ft.Ref],
         *,
         route: Optional[str] = None,
         controls: Optional[List[ft.Control]] = None,
@@ -38,8 +40,6 @@ class MvpView(ft.View):
             scroll,
             auto_scroll,
         )
-
-        self.ref_map = ref_map
 
     def render(self, model: BaseModel) -> None:
         page: ft.Page | None = None
