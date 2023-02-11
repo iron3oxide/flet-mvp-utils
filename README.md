@@ -1,7 +1,7 @@
 # flet-mvp-utils
 
 - [flet-mvp-utils](#flet-mvp-utils)
-  - [Architecture](#architecture)
+  - [Architecture / API](#architecture--api)
   - [Usage](#usage)
     - [View](#view)
     - [Presenter](#presenter)
@@ -17,7 +17,7 @@ hence the name of the library.
 At this stage,
 it can be used to ease working with any model-based architecture pattern though.
 
-## Architecture
+## Architecture / API
 
 ```mermaid
 flowchart TB
@@ -29,6 +29,47 @@ flowchart TB
     DataSource<-- query/modify according to intent -->DB/API/etc
 ```
 
+One of the main goals of this library
+is to reduce the amount of boilerplate code that is needed
+in order to implement an MVP-based architecture for flet apps.
+This should however not come at the cost of typechecking and autocomplete.
+That is why for each class you will interact with,
+the general way of doing things stays the same:
+
+```python
+class MyClass(LibraryClass):
+    variable_needed_by_library_class_and_this_class: MyOtherClass
+
+    def some_method(self):
+        ...
+```
+
+This approach solves the following problem:
+In order to do their helpful work behind the scenes,
+the library classes need to access objects
+that the concrete subclasses receive or create,
+e.g. the DataSource in MvpPresenter implementations.
+MvpPresenter can only know that the DataSource is an instance of MvpDataSource,
+so a subclass accessing a `self.data_source` variable set in the parent class
+(how it is set is more or less irrelevant) would not know anymore than that
+and thus your IDE can't properly autocomplete for you anymore.
+
+There is a bit of magic
+(namely abstract class properties and a bit of dataclass wizardry)
+going on behind the scenes that makes this work,
+but it should save you from ever having to write an `__init__()` method
+while still getting helpful autocomplete in `MyClass` for
+`variable_needed_by_library_class_and_this_class`.
+It also makes the approach more declarative rather than imperative,
+which some developers might prefer (or so I've heard).
+
+If you feel you need this library to properly design your flet app,
+it is probably complex enough to need routing
+and maybe even an app state solution as well.
+Lucky for you, [flet-routed-app](https://github.com/iron3oxide/flet-routed-app)
+and flet-mvp-utils are designed to compliment each other
+while none of both strictly requires usage of the other in order to work.
+
 ## Usage
 
 Say you have a form and want to validate the TextFields in it
@@ -38,13 +79,16 @@ when a submit button is clicked.
 
 Your view uses [refs](https://flet.dev/docs/guides/python/control-refs/).
 The actual UI code may be located somewhere else
-and simply receive the refs and return a component that is connected to the ref.
+and simply receive the refs and/or callbacks
+and return a component that is connected to the ref.
 When creating the view class, you inherit from `MvpView`
-and in your `__init__.py`, you create a dictionary that maps the attribute names
+and create a class variable named `ref_map`,
+containing a dictionary that maps the attribute names
 of your model to the respective ref
 of the control that should be tied to it.
-You then pass this dictionary to `super().__init__()`,
-along with any variable intended for the `flet.View` constructor.
+Any variable intended for the `flet.View` constructor will be accepted
+and passed on by the default `__init__()` method,
+so you don't need to define your own in most cases.
 
 ```python
 import flet as ft
@@ -53,17 +97,14 @@ from flet_mvp_utils import MvpView
 
 
 class FormView(MvpView):
-    def __init__(self, route: str)
-        self.ref_map = {
+    ref_map = {
             "last_name": ft.Ref[ft.TextField](),
             "first_name": ft.Ref[ft.TextField](),
             "age": ft.Ref[ft.TextField](),
         }
-        super().__init__(
-            ref_map=self.ref_map,
-            route=route
-        )
 
+    def some_intent_method(self, e) -> None:
+        ...
 ```
 
 `MvpView` has a `render(model)` method that takes a model
@@ -71,24 +112,37 @@ and updates any refs' current value to the model value if they aren't the same.
 This method is supposed to be called in the callback
 you register with the DataSource,
 so that a changed model is immediately reflected in the view.
+As you will learn in the next section,
+this doesn't have to concern you as it can be done automatically.
 
 ### Presenter
 
 Any class that inherits from `MvpPresenter` updates the view automatically
 once it is notified of a model update.
-Since it will be given both the View and the DataSource upon creation,
-it can easily do this in its `__init__()` method.
+`MvpPresenter` is a dataclass
+and so should its subclasses be.
+This helps to reduce the amount of boilerplate code
+(specifically `__init__()` methods) you have to write
+and keeps the general API of this library consistent.
+Since both the DataSource and the View are known to it
+(because the subclass fields override the fields of the same name in the superclass),
+`MvpPresenter` will automatically register a method as a callback with the DataSource
+that renders the new model in the given view in its `__post_init__()` hook.
 
 ```python
+from dataclasses import dataclass
 from flet_mvp_utils import MvpPresenter
 
+from my_package.views.form import FormDataSource, FormViewProtocol
 
+
+@dataclass
 class FormPresenter(MvpPresenter):
-    def __init__(self, data_source: FormDataSource, view: FormViewProtocol):
-        self.data_source = data_source
-        self.view = view
+    data_source: FormDataSource
+    view: FormViewProtocol
 
-        super().__init__(self.data_source, self.view)
+    def some_intent_handling_method(self) -> None:
+        ...
 ```
 
 `MvpPresenter` also provides a generic `build()` method
@@ -110,7 +164,8 @@ after you initialized them properly.
 
 These callbacks are meant to be used to inform a presenter that a new,
 updated model has been created.
-Since creating and updating a model is a rather repetitive and uniform task,
+Since creating new models to replace the current one is a rather repetitive
+and uniform task,
 `MvpDataSource` will do it for you.
 All you have to do is pass your model class to its constructor
 and call `self.update_model_partial(changes: dict)`
@@ -121,8 +176,10 @@ from flet_mvp_utils import MvpDataSource
 
 
 class FormDataSource(MvpDataSource):
-    def __init__(self, ...):
-        super().__init__(FormModel)
+    current_model = FormModel()
+
+    def some_method(self) -> None:
+        ...
 ```
 
 You will also see that after intitializing the superclass,
