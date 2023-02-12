@@ -59,7 +59,8 @@ There is a bit of magic
 going on behind the scenes that makes this work,
 but it should save you from ever having to write an `__init__()` method
 while still getting helpful autocomplete in `MyClass` for
-`variable_needed_by_library_class_and_this_class`.
+`variable_needed_by_library_class_and_this_class`,
+which itself will be autocompleted for you when defining `MyClass`.
 It also makes the approach more declarative rather than imperative,
 which some developers might prefer (or so I've heard).
 
@@ -181,11 +182,6 @@ class FormDataSource(MvpDataSource):
     def some_method(self) -> None:
         ...
 ```
-
-You will also see that after intitializing the superclass,
-your DataSource will have a `self.current_model` attribute.
-While you can be sure that this is a pydantic BaseModel,
-it is typed as `Any` to avoid typechecking troubles.
 
 ### Model
 
