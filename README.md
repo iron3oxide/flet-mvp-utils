@@ -1,5 +1,9 @@
 # flet-mvp-utils
 
+MOVED -> this project has been merged into
+ [fletched](https://github.com/iron3oxide/fletched),
+ any further development will happen there.
+
 - [flet-mvp-utils](#flet-mvp-utils)
   - [Architecture / API](#architecture--api)
   - [Usage](#usage)
