@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from typing import List, Optional
 
 import flet as ft
@@ -5,6 +6,7 @@ from abstractcp import Abstract, abstract_class_property
 from pydantic import BaseModel
 
 from flet_mvp_utils.error import ErrorMessage
+from flet_mvp_utils.protocols import MvpPresenterProtocol
 
 
 class MvpView(Abstract, ft.View):
@@ -66,3 +68,7 @@ class MvpView(Abstract, ft.View):
 
         if page:
             page.update()
+
+    @abstractmethod
+    def build(self, presenter: MvpPresenterProtocol) -> None:
+        ...
